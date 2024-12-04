@@ -387,6 +387,12 @@ func (e *Error) ClientError() bool {
 		e.StatusCode < http.StatusInternalServerError
 }
 
+// ServerErrored returns a boolean whether or not the raised error was
+// caused by any of the 5xx error code from the server
+func (e *Error) ServerErrored() bool {
+	return e.Type == ErrorTypeService
+}
+
 // ClientRateLimited returns a boolean whether or not the raised error was
 // caused by too many requests from the client.
 func (e *Error) ClientRateLimited() bool {
